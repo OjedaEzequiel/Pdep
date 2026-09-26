@@ -1,0 +1,14 @@
+
+import entrenador.*
+import roberta.*
+import prueba.*
+
+test "El entrenador hace entrenar a Roberta"{
+    entrenador.hacerEntrenarA(roberta)
+    assert.equals(170,roberta.energia())
+}
+
+test "El entrenador  entrena a Pepita"{
+    entrenador.hacerEntrenarA(pepita)
+    assert.equals(80,pepita.energia())
+}

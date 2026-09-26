@@ -1,0 +1,13 @@
+
+
+import  prueba.*
+
+test "Pepita comienza con 100 de energia"{
+    assert.equals(100, pepita.energia())
+}
+
+test "Pepita pierde energia volando"{
+    pepita.volar()
+    assert.equals(90,pepita.energia() )
+}
+
