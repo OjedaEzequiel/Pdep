@@ -2,23 +2,26 @@ class Formacion{
     const vagones = []
     const locomotoras = []
 
-    method agregarVagon() {
-      
+    method agregarVagon(vagon) {
+        vagones.add(vagon)
     }
-    method agregarLocomotora() {
-      
+    method agregarLocomotora(locomotora) {
+      locomotoras.add(locomotora)
     }
     method cantidadVagones() {
-      
+      return vagones.size()
     }
     method cantidadMaximaDePasajeros() {
-      
+      return vagones.sum{ vagon => vagon.cantPasajeros()}
     }
     method cantidadVagonesLivianos() {
-      
+        const vagonesLianos=vagones.filter{vagon => vagon.esLiviano()}
+        
+        return  vagonesLianos.size()
     }
     method velocidadMaxima() {
-      
+      const locomotoraMasLenta= locomotoras.min{locomotora => locomotora.velocidadMaxima()}
+      return locomotoraMasLenta.velocidadMaxima()
     }
 }
 
@@ -26,7 +29,7 @@ class VagonPasajero{
     const largo
     const ancho
 
-    method cantPasajeros() {
+    method  cantPasajeros(){
         return if (ancho <= 2.5) {
             largo * 8
         } else {
