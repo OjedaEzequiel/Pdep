@@ -23,6 +23,14 @@ class Formacion{
       const locomotoraMasLenta= locomotoras.min{locomotora => locomotora.velocidadMaxima()}
       return locomotoraMasLenta.velocidadMaxima()
     }
+    method esEficiente(){
+      return locomotoras.all({locomotora => locomotora.arrastreUtil() > locomotora.peso()*5})
+    }
+    method puedeMoverse(){
+      const arrasteUtilLocomotoras= locomotoras.sum{locomotora => locomotora.arrastreUtil()}
+      const pesoTotalVagones = vagones.sum{vagon => vagon.pesoMaximo()}
+      return arrasteUtilLocomotoras >= pesoTotalVagones
+    }
 }
 
 class VagonPasajero{
@@ -62,6 +70,8 @@ class Locomotora {
   const peso
   const pesoMaximoDeArrastre
   const velocidadMaxima
+
+  method peso() = peso
 
   method arrastreUtil() {
     return pesoMaximoDeArrastre - peso
