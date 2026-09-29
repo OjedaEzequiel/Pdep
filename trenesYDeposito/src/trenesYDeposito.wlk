@@ -1,3 +1,11 @@
+class deposito {
+  const formaciones = #{}
+
+  method vagonesMasPesadosDeCadFormacion() {
+    return formaciones.map{formacion => formacion.vagonMasPesado()}.asSet() // asSet() convierte una colección en un conjunto (Set).
+  }
+}
+
 class Formacion{
     const vagones = []
     const locomotoras = []
@@ -24,13 +32,28 @@ class Formacion{
       return locomotoraMasLenta.velocidadMaxima()
     }
     method esEficiente(){
-      return locomotoras.all({locomotora => locomotora.arrastreUtil() > locomotora.peso()*5})
+      return locomotoras.all({locomotora => locomotora.esEficiente()})
     }
     method puedeMoverse(){
-      const arrasteUtilLocomotoras= locomotoras.sum{locomotora => locomotora.arrastreUtil()}
-      const pesoTotalVagones = vagones.sum{vagon => vagon.pesoMaximo()}
-      return arrasteUtilLocomotoras >= pesoTotalVagones
+
+      return self.arrastreUtilTotal() >= self.pesoMaximoTotalVagones()
     }
+    method faltaParaMoverse() {
+       
+       return self.pesoMaximoTotalVagones() - self.arrastreUtilTotal() 
+    }
+
+    //Metodos auxiliares
+    method pesoMaximoTotalVagones(){
+      return vagones.sum({vagon => vagon.pesoMaximo()})
+    }
+    method arrastreUtilTotal(){
+      return locomotoras.sum{locomotora => locomotora.arrastreUtil()}
+    }
+    method vagonMasPesado() {
+      return vagones.max{vagon => vagon.pesoMaximo()}
+    }
+    
 }
 
 class VagonPasajero{
@@ -77,4 +100,8 @@ class Locomotora {
     return pesoMaximoDeArrastre - peso
   }
   method velocidadMaxima() = velocidadMaxima
+
+  method esEficiente() {
+    return self.arrastreUtil() >= peso *5
+  }
 }
