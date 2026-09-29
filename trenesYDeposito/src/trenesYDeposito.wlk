@@ -4,6 +4,14 @@ class deposito {
   method vagonesMasPesadosDeCadFormacion() {
     return formaciones.map{formacion => formacion.vagonMasPesado()}.asSet() // asSet() convierte una colección en un conjunto (Set).
   }
+
+  method necesitaConductorExperimentado() {
+    formaciones.any(
+      {formacion => formacion.esCompleja()},
+      {formacion => formacion.pesoTotal()>1000}
+      )
+  }
+
 }
 
 class Formacion{
@@ -53,6 +61,23 @@ class Formacion{
     method vagonMasPesado() {
       return vagones.max{vagon => vagon.pesoMaximo()}
     }
+    method cantidadLocomotoras(){
+      return locomotoras.size()
+    }
+    method esCompleja(){
+      return self.cantidadVagones() + self.cantidadLocomotoras() > 20
+    }
+    method pesoTotalVagones() {
+      return vagones.sum{vagon => vagon.pesoMaximo()}
+    }
+    method pesoTotalLocomotoras(){
+      return locomotoras.sum{locomotora => locomotora.peso()}
+    }
+
+    method pesoTotal() {
+      return self.pesoTotalVagones() + self.pesoTotalLocomotoras()
+    }
+
     
 }
 
