@@ -6,10 +6,8 @@ class deposito {
   }
 
   method necesitaConductorExperimentado() {
-    formaciones.any(
-      {formacion => formacion.esCompleja()},
-      {formacion => formacion.pesoTotal()>1000}
-      )
+    formaciones.any{formacion => formacion.esCompleja()}
+      
   }
 
 }
@@ -43,7 +41,6 @@ class Formacion{
       return locomotoras.all({locomotora => locomotora.esEficiente()})
     }
     method puedeMoverse(){
-
       return self.arrastreUtilTotal() >= self.pesoMaximoTotalVagones()
     }
     method faltaParaMoverse() {
@@ -64,7 +61,7 @@ class Formacion{
     method cantidadLocomotoras(){
       return locomotoras.size()
     }
-    method esCompleja(){
+    method tieneMasDe20Unidades(){
       return self.cantidadVagones() + self.cantidadLocomotoras() > 20
     }
     method pesoTotalVagones() {
@@ -76,6 +73,9 @@ class Formacion{
 
     method pesoTotal() {
       return self.pesoTotalVagones() + self.pesoTotalLocomotoras()
+    }
+    method esCompleja(){
+      return self.tieneMasDe20Unidades() || self.pesoTotal()>10000
     }
 
     
