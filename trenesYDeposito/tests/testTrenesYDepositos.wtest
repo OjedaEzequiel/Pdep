@@ -1,0 +1,56 @@
+import src.trenesYDeposito.*
+
+describe "Formacion" {
+  test "Una formacion nueva no tiene vagones" {
+    const formacion = new Formacion()
+    
+    assert.equals(0,formacion.cantidadVagones())
+  }
+  test "Aniadir un vagon a una formacion"{
+    const formacion = new Formacion()
+    const vagon = new VagonPasajero(largo = 10,ancho = 2)
+
+    formacion.agregarVagon(vagon)
+    assert.equals(1,formacion.cantidadVagones())
+  }
+
+  test "Agregar una locomotora a la formacion" {
+    const formacion = new Formacion()
+    const locomotora = new Locomotora(peso=10000,pesoMaximoDeArrastre = 30000,velocidadMaxima=80)
+    formacion.agregarLocomotora(locomotora)
+    assert.equals(1, formacion.cantidadLocomotoras())
+    
+  }
+
+  test "La formacion tiene 3 vagones"
+  {
+    const formacion = new Formacion()
+    const vagon1 = new VagonPasajero(largo = 10,ancho = 2)
+    const vagon2 = new VagonPasajero(largo = 14,ancho = 2)
+    const vagon3 = new VagonCarga(cargaMaxima = 2000)
+    formacion.agregarVagon(vagon1)
+    formacion.agregarVagon(vagon2)
+    formacion.agregarVagon(vagon3)
+    assert.equals(3, formacion.cantidadVagones())
+  }
+
+  test "La formacion no puede transportar pasajeros"
+  {
+    const formacion = new Formacion()
+    const vagon = new VagonCarga(cargaMaxima = 2000)
+    formacion.agregarVagon(vagon)
+
+    assert.equals(0, formacion.cantidadMaximaDePasajeros())
+  }
+
+  test "La formacion puede transportar 80 pasajeros como maximo"
+  {
+    const formacion = new Formacion()
+    const vagon = new VagonPasajero(largo = 10, ancho = 2)
+    formacion.agregarVagon(vagon)
+
+    assert.equals(80,formacion.cantidadMaximaDePasajeros())
+  }
+
+
+}
