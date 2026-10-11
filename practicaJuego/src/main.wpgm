@@ -8,17 +8,44 @@ object juego {
   
 }
 */
+object caja{
+  method image() = "cosas/caja.jpeg"
+  var property position = game.center()
+  
+  method subir(){
+    position = position.up(1)
+  }
+
+}
+
 object personaje {
   var property position = game.origin()
 
+  method centrar(){
+    position = game.center()
+  }
+
   method image() = "personaje.jpg"
+
+  method subir(){
+    position = position.up(1)
+  }
+  method enDiagonal(cantidadPosiciones){
+    position = position.up(cantidadPosiciones).right(cantidadPosiciones)
+  }
+    
 }
 
 program juego {
   game.width(50)
   game.height(50)
-
-  game.addVisual(personaje)
+  game.addVisualCharacter(personaje)
+  game.addVisual(caja)
   
+  //Cuando el personaje colisione con la caja, el personaje habla y la caja se desplaza
+  game.onCollideDo(personaje, {elemento =>
+    elemento.subir()
+    game.say(personaje,"Opa! Me lleve puesta una caja!")
+  })
   game.start()
 }
