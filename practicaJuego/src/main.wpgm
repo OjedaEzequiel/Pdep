@@ -1,0 +1,24 @@
+import wollok.game.*
+
+/*
+object juego {
+  method iniciar(){
+    game.start()
+  }
+  
+}
+*/
+object personaje {
+  var property position = game.origin()
+
+  method image() = "personaje.jpg"
+}
+
+program juego {
+  game.width(50)
+  game.height(50)
+
+  game.addVisual(personaje)
+  
+  game.start()
+}
