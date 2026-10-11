@@ -67,6 +67,24 @@ describe "Formacion" {
     assert.equals(100,formacion.cantidadMaximaDePasajeros())
   }
 
+  //Tests punto 5
+  test "No hay vagones livianos en la formacion"
+  {
+    const vagon = new VagonPasajero(largo = 10, ancho = 2)
+    const formacion = self.formacionConVagon(vagon)
+
+    assert.equals(0,formacion.cantidadVagonesLivianos())
+  }
+
+  test "Hay 1 vagon liviano en la formacion"
+  {
+    const vagon = new VagonCarga(cargaMaxima=2000)
+    const formacion = self.formacionConVagon(vagon)
+
+    assert.equals(1,formacion.cantidadVagonesLivianos())
+  }
+
+  //tests punto 6
 
 
 
