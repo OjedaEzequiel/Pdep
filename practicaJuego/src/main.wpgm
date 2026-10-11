@@ -9,8 +9,9 @@ object juego {
 }
 */
 object caja{
-  method image() = "cosas/caja.jpeg"
   var property position = game.center()
+  method image() = "cosas/caja_50x50.png"
+  
   
   method subir(){
     position = position.up(1)
@@ -21,24 +22,13 @@ object caja{
 object personaje {
   var property position = game.origin()
 
-  method centrar(){
-    position = game.center()
-  }
-
-  method image() = "personaje.jpg"
-
-  method subir(){
-    position = position.up(1)
-  }
-  method enDiagonal(cantidadPosiciones){
-    position = position.up(cantidadPosiciones).right(cantidadPosiciones)
-  }
+  method image() = "personaje_50x50.png"
     
 }
 
 program juego {
-  game.width(50)
-  game.height(50)
+  game.width(10)
+  game.height(10)
   game.addVisualCharacter(personaje)
   game.addVisual(caja)
   
